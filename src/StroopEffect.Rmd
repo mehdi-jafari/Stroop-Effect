@@ -1,0 +1,148 @@
+---
+title: "Stroop Effect Exploration By Mehdi Jafari"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, packages} 
+library(ggplot2) 
+library(gridExtra)
+
+``` 
+
+## Introduction
+
+In psychology, the Stroop effect is a demonstration of interference in the 
+reaction time of a task. When the name of a color (e.g., "blue", "green", or 
+"red") is printed in a color that is not denoted by the name (e.g., the word 
+"red" printed in blue ink instead of red ink), naming the color of the word 
+takes longer and is more prone to errors than when the color of the ink matches
+the name of the color.
+
+In a Stroop task, participants are presented with a list of words, with each 
+word displayed in a color of ink. The participant’s task is to say out loud the
+color of the ink in which the word is printed. The task has two conditions: a 
+congruent words condition, and an incongruent words condition. In the congruent
+words condition, the words being displayed are color words whose names match the
+colors in which they are printed: for example, <span style="color:red">RED
+</span>, <span style="color:blue">BLUE</span> In the incongruent 
+words condition, the words displayed are color words whose names do not match 
+the colors in which they are printed: for example, <span style="color:PURPLE">
+PURPLE</span>, <span style="color:ORANGE">ORANGE</span>. In each case,
+we measure the time it takes to name the ink colors in equally-sized lists. 
+Each participant will go through and record a time from each condition.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE} 
+# Load the Data 
+dataset <- read.csv('dataset.csv') 
+```
+
+## Questions
+
+1- What is our independent variable? What is our dependent variable?
+
+  + dependent variable is the time that takes each participant to name the ink 
+    color
+  + independent variable is the congruent or incongruent of shown words
+
+
+
+
+2- What is an appropriate set of hypotheses for this task? What kind of 
+statistical test do you expect to perform? Justify your choices.
+
+Null hypotheses = mean of the time that takes for participants to say the words
+by applying incongruent treatment is equal to congruent condition's µi = µ0 
+
+Alternative hypotheses = mean the time that takes for participants to say the 
+words by applying incongruent treatment is greater than congruent condition's
+µi > µ0
+
+Since the sample size is less than 30 and we don't have the standard deviation 
+of the population then we should use t test statistics. If we had standard 
+deviation of population and the sample size was greater than 30 we would go 
+with z-test.
+
++ H0 --> µi = µ0
++ Ha --> µi > µ0
+
+Confidence level is 95% then α is 0.05.
+
+T critical value = 1.714
+
+3- Report some descriptive statistics regarding this dataset. Include at least 
+one measure of central tendency and at least one measure of variability
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#output summary of the data
+summary(dataset)
+```
+
+  
+4- Provide one or two visualizations that show the distribution of the sample 
+data. Write one or two sentences noting what you observe about the plot or plots
+.
+
+As it is depicted in the following histograms, most participants completed the
+incongruent word set between 16-25 Seconds while the congruent word set took 
+them between 11-17 seconds. It shows the congruent word set takes less time
+than the incongruent word set.
+
+Also by looking at the summary we can see the 75% of the distribution of 
+congruent dataset is less than 16.20 seconds while in incongruent dataset 
+is 24.5 seconds.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+
+p1 = ggplot( aes(x= Congruent), data=dataset) +
+  geom_histogram(col="red", fill="green" , binwidth = 2)
+
+p2 = ggplot( aes(x= Incongruent), data=dataset) +
+  geom_histogram(col="red", fill="green" , binwidth = 2)
+grid.arrange(p1,p2 , ncol = 2)
+
+```
+
+5- Now, perform the statistical test and report your results. What is your 
+confidence level and your critical statistic value? Do you reject the null 
+hypothesis or fail to reject it? Come to a conclusion in terms of the experiment
+task. Did the results match up with your expectations?
+
+Calculated values based on the dataset are the follwoing:  
+
++ Mean of differences	: 7.96  
+
++ Standard Deviation of differences :	4.86482691  
+
++ T-critical value : 1.74  
+
++ Degree of freedom	: 23  
+
++ Direction of the test : One tailed test  
+
++ <span>α</span>	: 0.05  
+
++ Standard Error (SEM) : 0.993028635  
+
++ T-Statistics : 7.964791667  
+
++ Cohen's D	: 1.637219949  
+
++ R2 : 0.733913037  
+
++ Margin of Error :	1.727869825  
+
++ Confidence Interval : 6.24 <=  CI  => 9.69  
+
+This is a dependent-sample and a pre-test, post-test scenario.
+
+Since the t-statistics falls in critical region which is way bigger than 
+1.714(t-critical value for α=0.05) we reject the null hypotheses.
+
+P-value is less than .05 Which means the two sample populations are 
+statistically significant.
+
+R2 is equal to 73% which means 73% of the difference is due to the incongruent
+treatment.
