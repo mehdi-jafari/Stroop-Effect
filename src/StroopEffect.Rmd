@@ -51,11 +51,16 @@ dataset <- read.csv('dataset.csv')
 2- What is an appropriate set of hypotheses for this task? What kind of 
 statistical test do you expect to perform? Justify your choices.
 
-Null hypotheses = mean of the time that takes for participants to say the words
-by applying incongruent treatment is equal to congruent condition's µi = µ0 
+Null hypotheses => There is no difference in population means of response time 
+under incongruent and congruent scenarios, which can be mathematically 
+represented as:
 
-Alternative hypotheses = mean the time that takes for participants to say the 
-words by applying incongruent treatment is greater than congruent condition's
+µi = µ0 
+
+Alternative hypotheses => population means of response time under incongruent 
+condition is greater than congruent condition's, which can be represented 
+mathematically as:  
+
 µi > µ0
 
 Since the sample size is less than 30 and we don't have the standard deviation 
@@ -76,6 +81,16 @@ one measure of central tendency and at least one measure of variability
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #output summary of the data
 summary(dataset)
+
+sdCongurent <- sd(dataset$Congruent) 
+sdIncongruent <- sd(dataset$Incongruent)
+
+paste("Standard Deviation of Congurent variable", sd(dataset$Congruent), sep=" : ")
+paste("Standard Deviation of Incongruent variable", sd(dataset$Incongruent), sep=" : ")
+
+paste("Variance of Congurent variable", var(dataset$Congruent), sep=" : ")
+paste("Variance of Incongruent variable", var(dataset$Incongruent), sep=" : ")
+
 ```
 
   
@@ -146,3 +161,7 @@ statistically significant.
 
 R2 is equal to 73% which means 73% of the difference is due to the incongruent
 treatment.
+
+in conclusion, it is clear that it takes significantly longer to complete the 
+task in the incongruent condition if compared with the congruent one for 
+the population set
