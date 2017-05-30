@@ -14,5 +14,7 @@ Download and install the R programming language FIRST at http://cran.rstudio.com
 After you install R, you can download and install RStudio from http://www.rstudio.com.
 
 ### Install Packages
-install.packages("ggplot2")
+
+install.packages("ggplot2")  
+
 install.packages("gridExtra")
